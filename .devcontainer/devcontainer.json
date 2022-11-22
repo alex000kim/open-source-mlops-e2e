@@ -1,0 +1,9 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/python:3.10",
+  "extensions": [
+    "Iterative.dvc",
+    "ms-python.python",
+    "redhat.vscode-yaml"
+  ],
+  "postCreateCommand": "pip install --user -r requirements.txt"
+}
