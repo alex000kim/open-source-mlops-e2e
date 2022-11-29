@@ -32,6 +32,3 @@ $ tree
 ├── clf-model.joblib # saved model
 └── feat_imp.csv # table with feature importance values
 ```
-## What's next?
-
-Check out `TODO.md` for the next steps
