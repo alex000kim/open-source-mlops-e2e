@@ -1,0 +1,4 @@
+outs:
+- md5: e6a45d434510e6bb13c3e7ae82bdafe9
+  size: 2820031
+  path: clf-model.joblib
