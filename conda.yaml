@@ -1,0 +1,8 @@
+name: open-source-e2e
+channels:
+  - conda-forge
+dependencies:
+  - python=3.8 # This version should match the version of Python used in Databricks environment
+  - pip
+  - pip:
+    - -r requirements.txt
