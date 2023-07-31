@@ -9,7 +9,6 @@ matplotlib
 seaborn
 plotly-express
 scikit-learn
-lightgbm
 xgboost
 eli5
 uvicorn
