@@ -1,0 +1,40 @@
+stages:
+  data_split:
+    cmd: python src/stages/data_split.py --config params.yaml
+    deps:
+    - src/stages/data_split.py
+    - data/raw
+    params:
+    - base
+    - data_split
+    outs:
+    - data/processed
+  train:
+      cmd: python src/stages/train.py --config=params.yaml
+      deps:
+      - src/stages/train.py
+      - data/processed
+      params:
+      - base
+      - train
+      outs:
+      - models/clf-model.joblib
+  eval:
+    cmd: python src/stages/eval.py --config=params.yaml
+    deps:
+    - src/stages/eval.py
+    - data/processed
+    - models/clf-model.joblib
+    params:
+    - base
+    - data_split
+    - train
+    outs:
+    - reports/feat_imp.csv:
+        cache: false
+    metrics:
+    - metrics.json:
+        cache: false
+    plots:
+    - reports/figures/cm.png:
+        cache: false
