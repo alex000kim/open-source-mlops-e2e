@@ -27,6 +27,7 @@ def data_split(params):
     y_train.to_pickle(processed_data_dir/'y_train.pkl')
     y_test.to_pickle(processed_data_dir/'y_test.pkl')
 
+
 if __name__ == '__main__':
     args_parser = argparse.ArgumentParser()
     args_parser.add_argument('--config', dest='config', required=True)
