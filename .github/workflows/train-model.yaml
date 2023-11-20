@@ -1,0 +1,48 @@
+name: train-model
+on:
+  push:
+    paths:
+      - "data/**"
+      - "src/**"
+      - "params.yaml"
+      - "dvc.*"
+jobs:
+  train-model:
+    runs-on: ubuntu-latest
+    environment: cloud
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: iterative/setup-cml@v1
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+      - name: SetupGitUser
+        run: cml ci
+        env:
+          REPO_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      - name: TrainModel
+        env:
+          REPO_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          pip install -r requirements.txt
+          dvc pull
+          dvc repro
+          dvc push
+          # Create CML report
+          echo "## Metrics" >> report.md
+          dvc metrics show --md >> report.md
+          echo "## Feature Importances" >> report.md
+          csv2md reports/feat_imp.csv >> report.md
+          echo "## Confusion Matrix" >> report.md
+          echo '![](reports/figures/cm.png)' >> report.md
+          cml comment create report.md
