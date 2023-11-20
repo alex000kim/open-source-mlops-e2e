@@ -21,7 +21,7 @@ data_split:
   processed_data_dir: data/processed
 
 train:
-  model_type: randomforest
+  model_type: xgboost
   model_dir: models
   model_path: models/clf-model.joblib
   params:

@@ -1,0 +1,31 @@
+name: deploy
+on:
+  push:
+    tags:
+      - "deploy-v*"
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    environment: cloud
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: iterative/setup-dvc@v1
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+      - name: PullModel
+        env:
+          REPO_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          pip install dvc[s3]
+          dvc pull models/clf-model.joblib
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: DeployApp
+        env: 
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: flyctl deploy --remote-only
