@@ -8,7 +8,6 @@ Dataset source: https://www.kaggle.com/datasets/filippoo/deep-learning-az-ann
 ## Use Case
 The objective is to train an ML model that returns the probability of a customer churning. This is a binary classification task, therefore F1-score is a good metric to evaluate the performance of this dataset as it weights recall and precision equally, and a good retrieval algorithm will maximize both precision and recall simultaneously.
 
-
 ## Setup
 Python 3.8+ is required to run code from this repo.
 ```
