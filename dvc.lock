@@ -141,3 +141,56 @@ stages:
       hash: md5
       md5: caf0e9dd62b0af32f14ee51055c366be
       size: 1149004
+  train_drift_detector:
+    cmd: python src/stages/drift_detector.py --config=params.yaml
+    deps:
+    - path: data/processed
+      hash: md5
+      md5: c9f8d0f86f89503597e1e9db96a8193d.dir
+      size: 722283
+      nfiles: 4
+    - path: models/clf-model.joblib
+      hash: md5
+      md5: caf0e9dd62b0af32f14ee51055c366be
+      size: 1149004
+    - path: src/stages/drift_detector.py
+      hash: md5
+      md5: bf0cdb21b655c79b138ca047676b93eb
+      size: 1386
+    params:
+      params.yaml:
+        base:
+          project: bank_customer_churn
+          raw_data_dir: data/raw
+          countries:
+          - France
+          - Spain
+          feat_cols:
+          - CreditScore
+          - Age
+          - Tenure
+          - Balance
+          - NumOfProducts
+          - HasCrCard
+          - IsActiveMember
+          - EstimatedSalary
+          targ_col: Exited
+          random_state: 42
+        data_split:
+          test_size: 0.25
+          processed_data_dir: data/processed
+        drift_detect:
+          min_batch_size: 50
+        train:
+          model_type: xgboost
+          model_dir: models
+          model_path: models/clf-model.joblib
+          params:
+            n_estimators: 200
+            max_depth: 20
+    outs:
+    - path: models/drift_detector
+      hash: md5
+      md5: e36ec6d39459eb6d32278a9c04ee83e3.dir
+      size: 483726
+      nfiles: 3

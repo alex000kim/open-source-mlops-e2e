@@ -2,39 +2,53 @@ stages:
   data_split:
     cmd: python src/stages/data_split.py --config params.yaml
     deps:
-    - src/stages/data_split.py
-    - data/raw
+      - src/stages/data_split.py
+      - data/raw
     params:
-    - base
-    - data_split
+      - base
+      - data_split
     outs:
-    - data/processed
+      - data/processed
   train:
-      cmd: python src/stages/train.py --config=params.yaml
-      deps:
+    cmd: python src/stages/train.py --config=params.yaml
+    deps:
       - src/stages/train.py
       - data/processed
-      params:
+    params:
       - base
       - train
-      outs:
+    outs:
       - models/clf-model.joblib
   eval:
     cmd: python src/stages/eval.py --config=params.yaml
     deps:
-    - src/stages/eval.py
-    - data/processed
-    - models/clf-model.joblib
+      - src/stages/eval.py
+      - data/processed
+      - models/clf-model.joblib
     params:
-    - base
-    - data_split
-    - train
+      - base
+      - data_split
+      - train
     outs:
-    - reports/feat_imp.csv:
-        cache: false
+      - reports/feat_imp.csv:
+          cache: false
     metrics:
-    - metrics.json:
-        cache: false
+      - metrics.json:
+          cache: false
     plots:
-    - reports/figures/cm.png:
-        cache: false
+      - reports/figures/cm.png:
+          cache: false
+
+  train_drift_detector:
+    cmd: python src/stages/drift_detector.py --config=params.yaml
+    deps:
+      - src/stages/drift_detector.py
+      - models/clf-model.joblib
+      - data/processed
+    params:
+      - base
+      - train
+      - data_split
+      - drift_detect
+    outs:
+      - models/drift_detector
