@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for open-source-mlops-e2e on 2023-11-20T18:13:03Z
+# fly.toml app configuration file generated for open-source-mlops-e2e-withered-frog-9837 on 2023-11-26T20:24:00-05:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "open-source-mlops-e2e"
-primary_region = "iad"
+app = "open-source-mlops-e2e-withered-frog-9837"
+primary_region = "yul"
 
 [build]
 

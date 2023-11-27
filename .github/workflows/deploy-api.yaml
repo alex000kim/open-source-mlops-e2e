@@ -23,7 +23,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           pip install dvc[s3]
-          dvc pull models/clf-model.joblib
+          dvc pull models/clf-model.joblib models/drift_detector
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: DeployApp
         env: 
