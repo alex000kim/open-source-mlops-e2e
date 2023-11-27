@@ -50,7 +50,7 @@ stages:
       nfiles: 4
     - path: models/clf-model.joblib
       hash: md5
-      md5: 0e3e48b3eb30a27f0af2a0a8317ebb14
+      md5: caf0e9dd62b0af32f14ee51055c366be
       size: 1149004
     - path: src/stages/eval.py
       hash: md5
@@ -139,5 +139,5 @@ stages:
     outs:
     - path: models/clf-model.joblib
       hash: md5
-      md5: 0e3e48b3eb30a27f0af2a0a8317ebb14
+      md5: caf0e9dd62b0af32f14ee51055c366be
       size: 1149004
