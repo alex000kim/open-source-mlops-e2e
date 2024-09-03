@@ -1,5 +1,5 @@
 alibi-detect==0.11.4
-dvc[all]==3.13.0
+dvc[all]==3.55.0
 python-box==7.0.1
 jupyter==1.0.0
 pandas==2.0.3
