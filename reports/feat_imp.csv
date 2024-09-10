@@ -1,9 +1,9 @@
 feature,importance
-Age,0.23870300877516729
-NumOfProducts,0.17976457070794755
-IsActiveMember,0.13352516817389928
-Balance,0.031448178439179665
-Tenure,0.013593417446353184
-CreditScore,0.011742178681171379
-EstimatedSalary,0.0010163150370532392
-HasCrCard,-0.004856243394552084
+num__Age,0.21
+num__NumOfProducts,0.17
+num__IsActiveMember,0.10
+num__Balance,0.03
+num__CreditScore,0.02
+num__HasCrCard,0.01
+num__Tenure,0.01
+num__EstimatedSalary,-0.01
