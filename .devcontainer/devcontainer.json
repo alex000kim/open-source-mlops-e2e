@@ -5,5 +5,8 @@
     "ms-python.python",
     "redhat.vscode-yaml"
   ],
-  "postCreateCommand": "pip install --user -r requirements.txt"
+  "postCreateCommand": "pip install --user -r requirements.txt",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  }
 }
