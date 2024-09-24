@@ -38,3 +38,16 @@ stages:
         plots:
         - reports/figures/cm.png:
             cache: false
+            
+    train_drift_detector:
+        cmd: python src/stages/drift_detector.py --config=params.yaml
+        deps:
+        - src/stages/drift_detector.py
+        - models/clf-model.joblib
+        - data/processed
+        params:
+        - base
+        - train
+        - data_split
+        outs:
+        - models/drift_detector
